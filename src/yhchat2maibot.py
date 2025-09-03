@@ -82,9 +82,10 @@ async def receive_from_yhchat(websocket):
         if msg.header.type == 'push_message':
             pushMessage = PushMessage()
             msg.data.Unpack(pushMessage)
-            logger.info('【收到消息】'+pushMessage.content.text)
-            if pushMessage.contentType == 1 and check_allow_to_chat(pushMessage):
-                await send_to_maimcore(pushMessage)
+            if pushMessage.contentType == 1:
+                logger.info('【收到消息】'+pushMessage.content.text)
+                if check_allow_to_chat(pushMessage):
+                    await send_to_maimcore(pushMessage)
             
         elif msg.header.type == 'heartbeat_ack':
             logger.info('【心跳】')
