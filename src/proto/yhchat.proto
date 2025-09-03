@@ -40,9 +40,21 @@ message PushMessage {
 }
 
 message SendMessage{
-    string message_id = 2; // 信息ID
-    string chatId = 3; // 欲发送到的信息对象
-    ChatType chatType = 4; // 欲发送到的信息对象的类别，1-用户，2-群聊，3-机器人
+    string messageId = 2;
+    string chatId = 3;
+    ChatType chatType = 4;
     Content content = 5;
-    int64 contentType = 6; //1:文本, 2:图片, 3:markdown, 4:文件, 5:form, 6:文章, 7:表情, 8:HTML, 10:视频, 11:语音, 12:视频通话, 13:语音通话
+    int64 contentType = 6;
+}
+
+message GroupId {
+    string groupId = 2;
+}
+
+message GroupInfo {
+    Group group = 2;
+
+    message Group {
+        string name = 2;
+    }
 }

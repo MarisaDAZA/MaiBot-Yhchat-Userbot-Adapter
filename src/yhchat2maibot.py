@@ -7,6 +7,7 @@ from maim_message import BaseMessageInfo, UserInfo, GroupInfo,MessageBase, Seg
 from .config import config
 from .proto.yhchat_pb2 import Msg, PushMessage, ChatType
 from .maibot2yhchat import router
+from .group_name import get_group_name
 
 
 async def login(websocket):
@@ -22,7 +23,7 @@ async def login(websocket):
         }
     })
     await websocket.send(msg)
-    logger.info('登录')
+    logger.info('【登录】')
 
 async def heartbeat(websocket):
     while True:
@@ -89,7 +90,7 @@ async def receive_from_yhchat(websocket):
             
         elif msg.header.type == 'heartbeat_ack':
             logger.info('【心跳】')
-        else:
+        elif msg.header.type not in ['bot_board_message', 'draft_input']:
             logger.info('【未知消息类型】'+msg.header.type)
 
 # 构造并发送要发送给 MaimCore 的消息
@@ -97,7 +98,8 @@ async def send_to_maimcore(pushMessage):
     '''根据平台事件构造标准 MessageBase'''
     user_info = UserInfo(platform='yhchat', user_id=pushMessage.sender.id, user_nickname=pushMessage.sender.nickname)
     if pushMessage.chatType == ChatType.GROUP:
-        group_info = GroupInfo(platform='yhchat', group_id=pushMessage.chatId)
+        group_name = await get_group_name(pushMessage.chatId)
+        group_info = GroupInfo(platform='yhchat', group_id=pushMessage.chatId, group_name=group_name)
     else:
         group_info = None
     format_info = {'content_format': ['text'], 'accept_format': ['text']}
@@ -120,9 +122,5 @@ async def yhchat():
                 await login(websocket)
                 await asyncio.gather(heartbeat(websocket), receive_from_yhchat(websocket))
         except Exception as e:
-            logger.error('【连接中断】')
+            logger.exception(e)
             await asyncio.sleep(config['yhchat']['retry_wait'])
-            
-
-if __name__ == '__main__':
-    asyncio.run(yhchat())

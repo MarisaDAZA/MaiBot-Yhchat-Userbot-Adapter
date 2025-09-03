@@ -25,15 +25,15 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import any_pb2 as google_dot_protobuf_dot_any__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16src/proto/yhchat.proto\x12\x05proto\x1a\x19google/protobuf/any.proto\"\x17\n\x07\x43ontent\x12\x0c\n\x04text\x18\x01 \x01(\t\"d\n\x03Msg\x12!\n\x06header\x18\x01 \x01(\x0b\x32\x11.proto.Msg.Header\x12\"\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x14.google.protobuf.Any\x1a\x16\n\x06Header\x12\x0c\n\x04type\x18\x02 \x01(\t\"\x8e\x02\n\x0bPushMessage\x12\x12\n\nmessage_id\x18\x01 \x01(\t\x12)\n\x06sender\x18\x02 \x01(\x0b\x32\x19.proto.PushMessage.Sender\x12\x0e\n\x06\x63hatId\x18\x04 \x01(\t\x12!\n\x08\x63hatType\x18\x05 \x01(\x0e\x32\x0f.proto.ChatType\x12\x1f\n\x07\x63ontent\x18\x06 \x01(\x0b\x32\x0e.proto.Content\x12\x13\n\x0b\x63ontentType\x18\x07 \x01(\x03\x12\x0c\n\x04time\x18\x08 \x01(\x03\x1aI\n\x06Sender\x12\n\n\x02id\x18\x01 \x01(\t\x12!\n\x08\x63hatType\x18\x02 \x01(\x0e\x32\x0f.proto.ChatType\x12\x10\n\x08nickname\x18\x03 \x01(\t\"\x8a\x01\n\x0bSendMessage\x12\x12\n\nmessage_id\x18\x02 \x01(\t\x12\x0e\n\x06\x63hatId\x18\x03 \x01(\t\x12!\n\x08\x63hatType\x18\x04 \x01(\x0e\x32\x0f.proto.ChatType\x12\x1f\n\x07\x63ontent\x18\x05 \x01(\x0b\x32\x0e.proto.Content\x12\x13\n\x0b\x63ontentType\x18\x06 \x01(\x03*5\n\x08\x43hatType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x08\n\x04USER\x10\x01\x12\t\n\x05GROUP\x10\x02\x12\x07\n\x03\x42OT\x10\x03\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16src/proto/yhchat.proto\x12\x05proto\x1a\x19google/protobuf/any.proto\"\x17\n\x07\x43ontent\x12\x0c\n\x04text\x18\x01 \x01(\t\"d\n\x03Msg\x12!\n\x06header\x18\x01 \x01(\x0b\x32\x11.proto.Msg.Header\x12\"\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x14.google.protobuf.Any\x1a\x16\n\x06Header\x12\x0c\n\x04type\x18\x02 \x01(\t\"\x8e\x02\n\x0bPushMessage\x12\x12\n\nmessage_id\x18\x01 \x01(\t\x12)\n\x06sender\x18\x02 \x01(\x0b\x32\x19.proto.PushMessage.Sender\x12\x0e\n\x06\x63hatId\x18\x04 \x01(\t\x12!\n\x08\x63hatType\x18\x05 \x01(\x0e\x32\x0f.proto.ChatType\x12\x1f\n\x07\x63ontent\x18\x06 \x01(\x0b\x32\x0e.proto.Content\x12\x13\n\x0b\x63ontentType\x18\x07 \x01(\x03\x12\x0c\n\x04time\x18\x08 \x01(\x03\x1aI\n\x06Sender\x12\n\n\x02id\x18\x01 \x01(\t\x12!\n\x08\x63hatType\x18\x02 \x01(\x0e\x32\x0f.proto.ChatType\x12\x10\n\x08nickname\x18\x03 \x01(\t\"\x89\x01\n\x0bSendMessage\x12\x11\n\tmessageId\x18\x02 \x01(\t\x12\x0e\n\x06\x63hatId\x18\x03 \x01(\t\x12!\n\x08\x63hatType\x18\x04 \x01(\x0e\x32\x0f.proto.ChatType\x12\x1f\n\x07\x63ontent\x18\x05 \x01(\x0b\x32\x0e.proto.Content\x12\x13\n\x0b\x63ontentType\x18\x06 \x01(\x03\"\x1a\n\x07GroupId\x12\x0f\n\x07groupId\x18\x02 \x01(\t\"I\n\tGroupInfo\x12%\n\x05group\x18\x02 \x01(\x0b\x32\x16.proto.GroupInfo.Group\x1a\x15\n\x05Group\x12\x0c\n\x04name\x18\x02 \x01(\t*5\n\x08\x43hatType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x08\n\x04USER\x10\x01\x12\t\n\x05GROUP\x10\x02\x12\x07\n\x03\x42OT\x10\x03\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'src.proto.yhchat_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_CHATTYPE']._serialized_start=601
-  _globals['_CHATTYPE']._serialized_end=654
+  _globals['_CHATTYPE']._serialized_start=703
+  _globals['_CHATTYPE']._serialized_end=756
   _globals['_CONTENT']._serialized_start=60
   _globals['_CONTENT']._serialized_end=83
   _globals['_MSG']._serialized_start=85
@@ -45,5 +45,11 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_PUSHMESSAGE_SENDER']._serialized_start=385
   _globals['_PUSHMESSAGE_SENDER']._serialized_end=458
   _globals['_SENDMESSAGE']._serialized_start=461
-  _globals['_SENDMESSAGE']._serialized_end=599
+  _globals['_SENDMESSAGE']._serialized_end=598
+  _globals['_GROUPID']._serialized_start=600
+  _globals['_GROUPID']._serialized_end=626
+  _globals['_GROUPINFO']._serialized_start=628
+  _globals['_GROUPINFO']._serialized_end=701
+  _globals['_GROUPINFO_GROUP']._serialized_start=680
+  _globals['_GROUPINFO_GROUP']._serialized_end=701
 # @@protoc_insertion_point(module_scope)
