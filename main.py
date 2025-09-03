@@ -1,8 +1,13 @@
 import asyncio
-import yhchat_ws
-import maibot
+from src.yhchat2maibot import yhchat
+from src.maibot2yhchat import maibot
+from src.logger import logger
 
 async def main():
-    await asyncio.gather(yhchat_ws.main(), maibot.run_client())
+    await asyncio.gather(yhchat(), maibot())
 
-asyncio.run(main())
+if __name__ == "__main__":
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        logger.warning("用户中断")
