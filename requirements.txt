@@ -3,3 +3,4 @@ websockets
 aiohttp
 protobuf
 tomlkit
+loguru

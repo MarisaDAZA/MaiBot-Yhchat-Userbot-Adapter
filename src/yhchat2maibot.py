@@ -2,9 +2,9 @@ import websockets
 import asyncio
 import json
 from uuid import uuid4
+from loguru import logger
 from maim_message import BaseMessageInfo, UserInfo, GroupInfo,MessageBase, Seg
 from .config import config
-from .logger import logger
 from .proto.yhchat_pb2 import Msg, PushMessage, ChatType
 from .maibot2yhchat import router
 

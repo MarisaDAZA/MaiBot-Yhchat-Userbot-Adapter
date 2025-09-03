@@ -1,9 +1,9 @@
 import asyncio
 import aiohttp
 from uuid import uuid4
+from loguru import logger
 from maim_message import MessageBase, Router, RouteConfig, TargetConfig
 from .config import config
-from .logger import logger
 from .proto.yhchat_pb2 import ChatType, SendMessage
 
 

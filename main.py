@@ -1,7 +1,7 @@
 import asyncio
+from loguru import logger
 from src.yhchat2maibot import yhchat
 from src.maibot2yhchat import maibot
-from src.logger import logger
 
 async def main():
     await asyncio.gather(yhchat(), maibot())
