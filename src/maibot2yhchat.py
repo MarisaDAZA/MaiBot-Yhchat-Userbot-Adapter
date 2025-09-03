@@ -27,7 +27,7 @@ async def send_to_yhchat(chatId, chatType, text):
     )
     body.content.text = text
     await session.post('https://chat-go.jwzhd.com/v1/msg/send-message', data=body.SerializeToString())
-    logger.info('【发送消息】', text)
+    logger.info('【发送消息】'+text)
 
 async def receive_from_maimcore(message_dict: dict):
     '''
@@ -41,7 +41,7 @@ async def receive_from_maimcore(message_dict: dict):
         else:
             await send_to_yhchat(message.message_info.user_info.user_id, ChatType.USER, message.message_segment.data)
     except Exception as e: # byd不加这玩意出错了根本不报错
-        logger.error('【错误】',e)     
+        logger.error('【错误】')     
 # 注册消息处理器
 # Router 会自动将从对应 platform 收到的消息传递给注册的处理器
 router.register_class_handler(receive_from_maimcore)

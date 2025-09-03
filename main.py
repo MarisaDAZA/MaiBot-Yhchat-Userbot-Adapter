@@ -10,4 +10,4 @@ if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        logger.warning("用户中断")
+        logger.warning("【用户中断】")
