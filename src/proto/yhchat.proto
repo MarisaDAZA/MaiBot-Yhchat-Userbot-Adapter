@@ -12,6 +12,7 @@ enum ChatType {
 
 message Content {
     string text = 1;
+    string imageUrl = 3;
 }
 
 message Msg {
