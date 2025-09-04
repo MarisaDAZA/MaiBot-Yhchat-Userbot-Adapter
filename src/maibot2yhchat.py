@@ -4,8 +4,8 @@ from uuid import uuid4
 from loguru import logger
 from maim_message import MessageBase, Router, RouteConfig, TargetConfig
 from .config import config
+from .client_session import get_shared_session
 from .proto.yhchat_pb2 import ChatType, SendMessage
-from .client_session import session, set_global_session
 
 # 定义连接目标 (例如 MaimCore)
 route_config = RouteConfig(
@@ -19,6 +19,7 @@ route_config = RouteConfig(
 router = Router(route_config)
 
 async def send_to_yhchat(chat_id:str, chat_type:int, text:str):
+    session = get_shared_session()
     body = SendMessage(
         messageId = uuid4().hex,
         chatId = chat_id,
@@ -45,3 +46,15 @@ async def receive_from_maimcore(message_dict: dict):
 # 注册消息处理器
 # Router 会自动将从对应 platform 收到的消息传递给注册的处理器
 router.register_class_handler(receive_from_maimcore)
+
+async def maibot():
+    global session
+    session = aiohttp.ClientSession()
+    session.headers.update({
+        'User-Agent': 'android 1.4.89',
+        'Accept': 'application/x-protobuf',
+        'Accept-Encoding': 'gzip',
+        'Content-Type': 'application/x-protobuf',
+        'Token': config['yhchat']['token']
+    })
+    router.run()

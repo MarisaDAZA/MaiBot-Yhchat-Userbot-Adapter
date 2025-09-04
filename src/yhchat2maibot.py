@@ -90,8 +90,8 @@ async def receive_from_yhchat(websocket):
             
         elif msg.header.type == 'heartbeat_ack':
             logger.info('【心跳】')
-        elif msg.header.type not in ['bot_board_message', 'draft_input']:
-            logger.info('【未知消息类型】'+msg.header.type)
+        elif msg.header.type not in ['bot_board_message', 'draft_input', 'stream_message']:
+            logger.debug('【未知消息类型】'+msg.header.type)
 
 # 构造并发送要发送给 MaimCore 的消息
 async def send_to_maimcore(pushMessage):
@@ -113,6 +113,7 @@ async def send_to_maimcore(pushMessage):
     )
     message_segment = Seg('text', pushMessage.content.text)
     msg_to_send = MessageBase(message_info=message_info, message_segment=message_segment)
+    # logger.debug(msg_to_send)
     await router.send_message(msg_to_send)
 
 async def yhchat():
