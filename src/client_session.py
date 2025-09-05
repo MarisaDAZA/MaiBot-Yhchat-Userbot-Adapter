@@ -20,6 +20,6 @@ def get_shared_session():
 
 async def close_shared_session():
     global _session
-    if not _session and not _session.closed:
+    if _session and not _session.closed:
         logger.debug('关闭 Client Session')
         await _session.close()
