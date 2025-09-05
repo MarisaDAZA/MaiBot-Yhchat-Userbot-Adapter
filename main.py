@@ -6,12 +6,12 @@ from src.group_name import save_data
 from src.client_session import close_shared_session
 
 async def main():
-    await asyncio.gather(router.run(), yhchat())
-
-if __name__ == '__main__':
     try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        close_shared_session()
+    	await asyncio.gather(router.run(), yhchat())
+    except asyncio.CancelledError:
+        await close_shared_session()
         save_data()
         logger.warning('【用户中断】')
+
+if __name__ == '__main__':
+    asyncio.run(main())

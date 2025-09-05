@@ -36,25 +36,15 @@ async def receive_from_maimcore(message_dict: dict):
     '''
     try:
         message=MessageBase.from_dict(message_dict)
-        logger.info(f'收到来自 MaimCore ({message.message_info.platform}) 的回复: {message.message_segment}')
+        logger.debug(f'收到来自 MaimCore 的回复: {message.message_segment}')
         if message.message_info.group_info:
             await send_to_yhchat(message.message_info.group_info.group_id, ChatType.GROUP, message.message_segment.data)
         else:
             await send_to_yhchat(message.message_info.user_info.user_id, ChatType.USER, message.message_segment.data)
     except Exception as e: # byd不加这玩意出错了根本不报错
-        logger.exception(e)     
+        logger.exception(e)
+
 # 注册消息处理器
 # Router 会自动将从对应 platform 收到的消息传递给注册的处理器
 router.register_class_handler(receive_from_maimcore)
 
-async def maibot():
-    global session
-    session = aiohttp.ClientSession()
-    session.headers.update({
-        'User-Agent': 'android 1.4.89',
-        'Accept': 'application/x-protobuf',
-        'Accept-Encoding': 'gzip',
-        'Content-Type': 'application/x-protobuf',
-        'Token': config['yhchat']['token']
-    })
-    router.run()
