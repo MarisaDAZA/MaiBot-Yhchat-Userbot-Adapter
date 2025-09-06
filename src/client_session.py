@@ -4,7 +4,7 @@ from .config import config
 
 session = None
 
-def setup_session():
+async def setup_session():
     global session
     logger.debug('新建 Client Session')
     session = aiohttp.ClientSession()

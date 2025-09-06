@@ -8,9 +8,9 @@ from src.client_session import setup_session, close_session
 async def main():
     try:
         await setup_session()
-    	await asyncio.gather(router.run(), yhchat())
+        await asyncio.gather(router.run(), yhchat())
     except asyncio.CancelledError:
-        await close_shared_session()
+        await close_session()
         save_data()
         logger.warning('【用户中断】')
 
