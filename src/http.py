@@ -2,21 +2,16 @@ import aiohttp
 from loguru import logger
 from .config import config
 
-session = None
-
 async def setup_session():
     global session
-    logger.debug('新建 Client Session')
+    logger.debug('新建 Http Session')
     session = aiohttp.ClientSession()
     session.headers.update({
-        'User-Agent': 'android 1.4.89',
-        'Accept': 'application/x-protobuf',
-        'Accept-Encoding': 'gzip',
-        'Content-Type': 'application/x-protobuf',
         'Token': config['yhchat']['token']
+        'referer': 'http://myapp.jwznb.com'
     })
 
 async def close_session():
     global session
-    logger.debug('关闭 Client Session')
+    logger.debug('关闭 Http Session')
     await session.close()

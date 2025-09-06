@@ -2,7 +2,7 @@ import websockets
 import asyncio
 import json
 from uuid import uuid4
-from loguru import logger
+from .logger import logger
 from maim_message import BaseMessageInfo, UserInfo, GroupInfo,MessageBase, Seg
 from .config import config
 from .proto.yhchat_pb2 import Msg, PushMessage, ChatType
@@ -18,7 +18,7 @@ async def login(websocket):
         'data': {
             'userId': config['yhchat']['userId'],
             'token': config['yhchat']['token'],
-            'platform': 'android',
+            'platform': config['yhchat']['platform'],
             'deviceId': config['yhchat']['deviceid']
         }
     })

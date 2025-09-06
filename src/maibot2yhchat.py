@@ -1,10 +1,10 @@
 import asyncio
 import aiohttp
 from uuid import uuid4
-from loguru import logger
+from .logger import logger
 from maim_message import MessageBase, Router, RouteConfig, TargetConfig
 from .config import config
-from .client_session import session
+from . import http.session
 from .proto.yhchat_pb2 import ChatType, SendMessage
 
 # 定义连接目标 (例如 MaimCore)
@@ -26,7 +26,7 @@ async def send_to_yhchat(chat_id:str, chat_type:int, text:str):
         contentType = 1
     )
     body.content.text = text
-    await session.post('https://chat-go.jwzhd.com/v1/msg/send-message', data=body.SerializeToString())
+    await http.session.post('https://chat-go.jwzhd.com/v1/msg/send-message', data=body.SerializeToString())
     logger.info('【发送消息】'+text)
 
 async def receive_from_maimcore(message_dict: dict):

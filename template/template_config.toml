@@ -1,6 +1,7 @@
 [yhchat]                                       # 与云湖连接的ws服务设置
 userId = "1234567"                             # 云湖用户的ID
 token = "00000000-0000-4000-0000-000000000000" # 云湖用户的Token
+platform = "web"                               # 云湖用户的平台
 deviceid = "web-device-id"                     # 云湖用户的设备ID
 heartbeat_interval = 30                        # 心跳间隔（按秒计）
 retry_wait = 5                                 # 重连等待时间（按秒计）
@@ -21,5 +22,8 @@ private_list = ["1234567"]      # 私聊名单
                                 # 当private_list_type为blacklist时，私聊名单中的任何用户无法聊天
 
 ban_user_id = ["1234567"]       # 全局禁止名单（全局禁止名单中的用户无法进行任何聊天）
+
 ban_bot = false                 # 是否屏蔽云湖官方机器人
 
+[debug]
+level = "INFO" # 日志等级（DEBUG, INFO, WARNING, ERROR, CRITICAL）

@@ -3,7 +3,7 @@ from loguru import logger
 from src.yhchat2maibot import yhchat
 from src.maibot2yhchat import router
 from src.group_name import save_data
-from src.client_session import setup_session, close_session
+from src.http import setup_session, close_session
 
 async def main():
     try:
