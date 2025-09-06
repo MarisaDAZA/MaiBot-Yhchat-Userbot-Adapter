@@ -1,7 +1,7 @@
 import json
 from os import path
 from loguru import logger
-from .client_session import get_shared_session
+from .client_session import session
 from .proto.yhchat_pb2 import GroupId, GroupInfo
 
 if path.exists('group_names.json'):
@@ -12,7 +12,6 @@ else:
     group_names_data = {}
 
 async def get_group_info(group_id:str) -> str:
-    session = get_shared_session()
     body = GroupId(groupId = group_id)
     async with session.post('https://chat-go.jwzhd.com/v1/group/info', data=body.SerializeToString()) as r:
         string = await r.read()

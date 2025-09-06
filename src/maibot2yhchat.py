@@ -4,7 +4,7 @@ from uuid import uuid4
 from loguru import logger
 from maim_message import MessageBase, Router, RouteConfig, TargetConfig
 from .config import config
-from .client_session import get_shared_session
+from .client_session import session
 from .proto.yhchat_pb2 import ChatType, SendMessage
 
 # 定义连接目标 (例如 MaimCore)
@@ -19,7 +19,6 @@ route_config = RouteConfig(
 router = Router(route_config)
 
 async def send_to_yhchat(chat_id:str, chat_type:int, text:str):
-    session = get_shared_session()
     body = SendMessage(
         messageId = uuid4().hex,
         chatId = chat_id,
