@@ -123,4 +123,6 @@ async def yhchat():
                 await asyncio.gather(heartbeat(websocket), receive_from_yhchat(websocket))
         except Exception as e:
             logger.exception(e)
-            await asyncio.sleep(config['yhchat']['retry_wait'])
+            retry_wait = config['yhchat']['retry_wait']
+            logger.error(f'【与云湖的连接断开】将在{retry_wait}秒后重试')
+            await asyncio.sleep(retry_wait)
