@@ -14,4 +14,4 @@ def get_emoji_url(image_base64: str) -> str:
     image_bytes = base64.b64decode(image_base64)
     md5 = hashlib.md5(image_bytes).hexdigest()
     ext = filetype.guess(image_bytes).extension
-    return f'expression/{md5}.{ext}'
+    return f'expression/{md5}.{ext}' #有时候是sticker/，啊啊啊可恶的云湖
