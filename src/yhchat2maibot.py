@@ -1,4 +1,4 @@
--import websockets
+import websockets
 import asyncio
 import json
 from uuid import uuid4
@@ -95,15 +95,15 @@ async def receive_from_yhchat(websocket):
 async def send_to_maimcore(pushMessage):
     '''根据平台事件构造标准 MessageBase'''
     if pushMessage.contentType == 1:
-        logger.info('【收到消息】'pushMessage.sender.id)
+        logger.info(f'【收到消息】{pushMessage.sender.id}')
         message_segment = Seg('text', pushMessage.content.text)
         format_info = {'content_format': ['text'], 'accept_format': ['text', 'emoji']}
     elif pushMessage.contentType == 2:
-        logger.info('【收到图片】'pushMessage.content.imageUrl)
+        logger.info(f'【收到图片】{pushMessage.content.imageUrl}')
         message_segment = Seg('image', get_image_base64(pushMessage.content.imageUrl))
         format_info = {'content_format': ['image'], 'accept_format': ['text', 'emoji']}
     elif pushMessage.contentType == 7:
-        logger.info('【收到表情】'pushMessage.content.imageUrl)
+        logger.info(f'【收到表情】{pushMessage.content.imageUrl}')
         message_segment = Seg('emoji', get_image_base64(pushMessage.content.imageUrl))
         format_info = {'content_format': ['emoji'], 'accept_format': ['text', 'emoji']}
     else:
