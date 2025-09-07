@@ -1,15 +1,8 @@
-import json
-from os import path
 from .logger import logger
 from . import http.session
 from .proto.yhchat_pb2 import GroupId, GroupInfo
 
-if path.exists('group_names.json'):
-    logger.debug('读取群名数据')
-    with open('group_names.json', 'r', encoding='utf-8') as f:
-        group_names_data = json.load(f)
-else:
-    group_names_data = {}
+group_names_data = {}
 
 async def get_group_info(group_id:str) -> str:
     body = GroupId(groupId = group_id)
@@ -27,8 +20,3 @@ async def get_group_name(group_id:str) -> str:
         logger.debug('获取到群聊名字：'+name)
         group_names_data[group_id] = name
         return name
-
-def save_data():
-    with open('group_names.json', 'w', encoding='utf-8') as f:
-        json.dump(group_names_data, f, indent=4, ensure_ascii=False)
-        logger.debug('保存群名数据')
