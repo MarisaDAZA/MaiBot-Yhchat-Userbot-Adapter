@@ -1,5 +1,5 @@
 from .logger import logger
-from . import http.session
+from . import http
 from .proto.yhchat_pb2 import GroupId, GroupInfo
 
 group_names_data = {}

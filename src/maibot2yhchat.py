@@ -4,7 +4,7 @@ from uuid import uuid4
 from .logger import logger
 from maim_message import MessageBase, Router, RouteConfig, TargetConfig
 from .config import config
-from . import http.session
+from . import http
 from .proto.yhchat_pb2 import ChatType, SendMessage
 from .emoji import get_emoji_url
 
@@ -25,11 +25,11 @@ async def send_to_yhchat(chat_id:str, chat_type:int, content_type:str, content:s
         chatId = chat_id,
         chatType = chat_type,
     )
-    if content_type = 'text':
+    if content_type == 'text':
         body.contentType = 1
         body.content.text = content
-        logger.info(f'【发送消息】{text}')
-    elif content_type = 'emoji':
+        logger.info(f'【发送消息】{content}')
+    elif content_type == 'emoji':
         body.contentType = 7
         emoji_url = get_emoji_url(content)
         body.content.emojiUrl = emoji_url

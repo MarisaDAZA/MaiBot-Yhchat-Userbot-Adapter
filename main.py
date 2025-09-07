@@ -2,7 +2,6 @@ import asyncio
 from loguru import logger
 from src.yhchat2maibot import yhchat
 from src.maibot2yhchat import router
-from src.group_name import save_data
 from src.http import setup_session, close_session
 
 async def main():
@@ -11,7 +10,6 @@ async def main():
         await asyncio.gather(router.run(), yhchat())
     except asyncio.CancelledError:
         await close_session()
-        save_data()
         logger.warning('【用户中断】')
 
 if __name__ == '__main__':

@@ -4,3 +4,4 @@ aiohttp
 protobuf
 tomlkit
 loguru
+filetype
