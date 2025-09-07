@@ -11,8 +11,8 @@ async def get_image_base64(url: str) -> str:
         image_bytes = r.read()
     return base64.b64encode(image_bytes).decode()
 
-def get_emoji_name(image_base64: str) -> str:
+def get_emoji_url(image_base64: str) -> str:
     image_bytes = base64.b64decode(image_base64)
     md5 = hashlib.md5(image_bytes).hexdigest()
     ext = filetype.guess(file_path).extension
-    return f'{md5}.{ext}'
+    return f'expression/{md5}.{ext}'
