@@ -17,6 +17,6 @@ async def get_group_name(group_id:str) -> str:
         return group_names_data[group_id]
     else:
         name = await get_group_info(group_id)
-        logger.debug('获取到群聊名字：'+name)
+        logger.debug(f'获取到群聊名字：{name}')
         group_names_data[group_id] = name
         return name

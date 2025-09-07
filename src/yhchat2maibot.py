@@ -1,4 +1,4 @@
-import websockets
+-import websockets
 import asyncio
 import json
 from uuid import uuid4
@@ -8,6 +8,7 @@ from .config import config
 from .proto.yhchat_pb2 import Msg, PushMessage, ChatType
 from .maibot2yhchat import router
 from .group_name import get_group_name
+from .emoji import get_image_base64
 
 
 async def login(websocket):
@@ -84,10 +85,8 @@ async def receive_from_yhchat(websocket):
         if msg.header.type == 'push_message':
             pushMessage = PushMessage()
             msg.data.Unpack(pushMessage)
-            if pushMessage.contentType == 1:
-                logger.info('【收到消息】'+pushMessage.content.text)
-                if check_allow_to_chat(pushMessage):
-                    await send_to_maimcore(pushMessage)
+            if check_allow_to_chat(pushMessage):
+                await send_to_maimcore(pushMessage)
 
         elif msg.header.type == 'heartbeat_ack':
             logger.debug('【心跳】')
@@ -95,6 +94,17 @@ async def receive_from_yhchat(websocket):
 # 构造并发送要发送给 MaimCore 的消息
 async def send_to_maimcore(pushMessage):
     '''根据平台事件构造标准 MessageBase'''
+    if pushMessage.contentType == 1:
+        logger.info('【收到消息】'pushMessage.sender.id)
+        message_segment = Seg('text', pushMessage.content.text)
+    elif pushMessage.contentType == 2:
+        logger.info('【收到图片】'pushMessage.content.imageUrl)
+        message_segment = Seg('image', get_image_base64(pushMessage.content.imageUrl))
+    elif pushMessage.contentType == 7:
+        logger.info('【收到表情】'pushMessage.content.imageUrl)
+        message_segment = Seg('emoji', get_image_base64(pushMessage.content.imageUrl))
+    else:
+        return
     user_info = UserInfo(platform='yhchat', user_id=pushMessage.sender.id, user_nickname=pushMessage.sender.nickname)
     if pushMessage.chatType == ChatType.GROUP:
         group_name = await get_group_name(pushMessage.chatId)

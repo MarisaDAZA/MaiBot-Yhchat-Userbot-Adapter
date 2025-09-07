@@ -27,7 +27,7 @@ async def send_to_yhchat(chat_id:str, chat_type:int, text:str):
     )
     body.content.text = text
     await http.session.post('https://chat-go.jwzhd.com/v1/msg/send-message', data=body.SerializeToString())
-    logger.info('【发送消息】'+text)
+    logger.info(f'【发送消息】{text}')
 
 async def receive_from_maimcore(message_dict: dict):
     '''
