@@ -77,8 +77,7 @@ def check_allow_to_chat(pushMessage):
         return True
 
 async def receive_from_yhchat(websocket):
-    while True:
-        string = await websocket.recv()
+    async for string in websocket:
         msg = Msg()
         msg.ParseFromString(string)
 
