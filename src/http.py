@@ -6,6 +6,7 @@ async def setup_session():
     global session
     logger.debug('新建 Http Session')
     session = aiohttp.ClientSession()
+    session.headers.update({'Token': config['yhchat']['token']})
 
 async def close_session():
     global session

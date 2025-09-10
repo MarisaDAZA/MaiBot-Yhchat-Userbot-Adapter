@@ -37,7 +37,7 @@ async def send_to_yhchat(chat_id:str, chat_type:int, content_type:str, content:s
     else:
         logger.warning(f'MaimCore 返回不支持的消息类型：{message.message_segment.type}')
         return
-    await http.session.post('https://chat-go.jwzhd.com/v1/msg/send-message', data=body.SerializeToString(), headers={'Token': config['yhchat']['token']})
+    await http.session.post('https://chat-go.jwzhd.com/v1/msg/send-message', data=body.SerializeToString())
 
 async def receive_from_maimcore(message_dict: dict):
     '''
