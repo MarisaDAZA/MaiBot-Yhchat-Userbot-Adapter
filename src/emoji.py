@@ -6,7 +6,7 @@ from . import http
 
 async def get_image_base64(url: str) -> str:
     """获取图片/表情包的Base64"""
-    async with http.session.get(url) as r:
+    async with http.session.get(url, headers={'Referer': 'http://myapp.jwznb.com'}) as r:
         image_bytes = await r.read()
     return base64.b64encode(image_bytes).decode()
 

@@ -6,7 +6,7 @@ group_names_data = {}
 
 async def get_group_info(group_id:str) -> str:
     body = GroupId(groupId = group_id)
-    async with http.session.post('https://chat-go.jwzhd.com/v1/group/info', data=body.SerializeToString()) as r:
+    async with http.session.post('https://chat-go.jwzhd.com/v1/group/info', data=body.SerializeToString(), headers={'Token': config['yhchat']['token']}) as r:
         string = await r.read()
         groupInfo = GroupInfo()
         groupInfo.ParseFromString(string)

@@ -12,9 +12,8 @@ from .emoji import get_image_base64
 
 
 async def login(websocket):
-    seq = uuid4().hex
     msg = json.dumps({
-        'seq': seq,
+        'seq': uuid4().hex,
         'cmd': 'login',
         'data': {
             'userId': config['yhchat']['userId'],
@@ -28,14 +27,13 @@ async def login(websocket):
 
 async def heartbeat(websocket):
     while True:
-        seq = uuid4().hex
         msg = json.dumps({
-            'seq': seq,
+            'seq': uuid4().hex,
             'cmd': 'heartbeat',
             'data': {}
         })
         await websocket.send(msg)
-        await asyncio.sleep(30)
+        await asyncio.sleep(config['yhchat']['heartbeat_interval'])
 
 def check_allow_to_chat(pushMessage):
         '''
