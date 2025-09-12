@@ -50,11 +50,12 @@ def check_allow_to_chat(pushMessage):
         if pushMessage.sender.id in config['chat']['ban_user_id']:
             logger.warning('用户在全局黑名单中，消息被丢弃')
             return False
-        if config['chat']['ban_bot'] and pushMessage.sender.chatType == ChatType.BOT:
-            logger.warning('云湖官方机器人消息拦截已启用，消息被丢弃')
-            return False
 
         if pushMessage.chatType == ChatType.GROUP:
+            if config['chat']['ban_bot'] and pushMessage.sender.chatType == ChatType.BOT:
+                logger.warning('云湖官方机器人消息拦截已启用，消息被丢弃')
+                return False
+
             if config['chat']['group_list_type'] == 'whitelist' and pushMessage.chatId not in config['chat']['group_list']:
                 logger.warning('群聊不在聊天白名单中，消息被丢弃')
                 return False
